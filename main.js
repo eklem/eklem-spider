@@ -64,7 +64,8 @@ function Spider(options) {
   this.maxSockets = options.maxSockets || 4;
   this.userAgent = options.userAgent || firefox;
   this.cache = options.cache || new NoCache();
-  this.pool = options.pool || {maxSockets: options.maxSockets};
+  this.pool = options.pool || {maxSockets: this.maxSockets};
+  this.strictSSL = options.strictSSL || true;
   this.options = options;
   this.currentUrl = null;
   this.routers = {};
@@ -110,11 +111,15 @@ Spider.prototype.get = function (url, referer) {
       }
     }
 
-    request.get({url:url, headers:h, pool:self.pool}, function (e, resp) {
+    request.get({url:url, headers:h, pool:self.pool, strictSSL: self.strictSSL}, function (e, resp, body) {
       self.emit('log', debug, 'Response received for ' + url + '.');
+      if (resp === null || resp == 'null') {
+        self.emit('log', debug, 'No request '+url);
+        return;
+      }
       if (e || !resp) {
         self.emit('log', debug, 'Error getting URL ' + url);
-        throw new Error("Failed to get response from: " + url);
+        throw new Error('Failed to get response from: ' + url);
       } else if (resp.statusCode === 304) {
         self.cache.get(url, function (c_) {
           c_.statusCode = 304;

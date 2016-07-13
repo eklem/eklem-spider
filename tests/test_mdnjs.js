@@ -22,6 +22,7 @@ for (var i = 0; i < subroutes.length; ++i) {
   var subroute = subroutes[i];
   jsSpider.route('developer.mozilla.org', '/en/' + subroute + '/*', function ($, url) {
     console.log(url + ' :: ' + $('#title').text().trim());
+    console.dir(url + ' :: ' + $('#title').text().trim());
     var crawlfn = function() {
       var href = $(this).attr('href');
       jsSpider.get(href);

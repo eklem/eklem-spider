@@ -17,12 +17,12 @@ spider
             spider.get(href);
         });
     })
-    .route('nodejs.org', '/docs/*', function () {
-        assert.equal(this.response.request.href.indexOf("http://nodejs.org/docs/"), 0);
+    .route('nodejs.org', ' /docs/latest/api/', function () {
+        assert.equal(this.response.request.href.indexOf("https://nodejs.org/docs/latest/api/"), 0);
         assert.equal(this.response.statusCode, 200);
     })
     .get('http://nodejs.org/')
-    .log('info');
+    .log('debug');
 
 spider
     .route('nodejs.org', '/idonotexist',
@@ -35,4 +35,4 @@ spider
         assert.ok($('body').text().length > 0);
     })
     .get('http://nodejs.org/idonotexist')
-    .log('info');
+    .log('debug');

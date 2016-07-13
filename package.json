@@ -1,20 +1,24 @@
 {
-  "name" : "spider"
-  , "description" : "Programmable spidering of web sites with node.js and jQuery"
-  , "tags" : ["dom","javascript","crawling","jquery", "spider", "spidering"]
-  , "version" : "0.0.2"
-  , "author" : "Mikeal Rogers <mikeal.rogers@gmail.com>"
-  , "repository" :
-  { "type" : "git"
-    , "url" : "http://github.com/mikeal/spider.git"
-  }
-  , "bugs" :
-  { "web" : "http://github.com/mikeal/spider/issues" }
-  , "engines" : ["node >= 0.4.4"]
-  , "main" : "./main"
-  , "dependencies": {
-    "request" : ">= 2.2.9"
-    , "routes" : ">= 0.1.0"
-    , "cheerio": ">= 0.3.2"
+  "name" : "spider",
+  "description" : "Programmable spidering of web sites with node.js and jQuery",
+  "tags" : ["dom","javascript","crawling","jquery", "spider", "spidering"],
+  "version" : "0.0.2",
+  "author" : "Mikeal Rogers <mikeal.rogers@gmail.com>",
+  "repository" :
+  { 
+    "type" : "git",
+    "url" : "http://github.com/mikeal/spider.git"
+  },
+  "bugs" :
+  {
+    "url" : "http://github.com/mikeal/spider/issues"
+  },
+  "engines" : ["node >= 0.4.4"],
+  "main" : "./main",
+  "dependencies" :
+  {
+    "request" : "~2.73.0",
+    "routes" : "~2.1.0",
+    "cheerio": "~0.20.0"
   }
 }

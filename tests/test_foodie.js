@@ -81,5 +81,5 @@ s.route('blogs.sfweekly.com', '/foodie/sfoodies_92/index.php*', function ($) {
 
   s.get($('a').attr('href'));
 })
-s.get('http://blogs.sfweekly.com/foodie/sfoodies_92/index.php?page=1');
+s.get('http://blogs.sfweekly.com/foodie/sfoodies_92/index.php?page=1').log('debug');
   
