@@ -9,10 +9,10 @@
 ## (How to use the) API
 
 ### Creating a Spider
-<pre>
+```javascript
   var spider = require('eklem-spider');
   var s = spider();
-</pre>
+```
 
 #### spider(options)
 
