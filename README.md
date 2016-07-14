@@ -2,19 +2,15 @@
 
 ## Install
 
-From source:
-
-<pre>
-  git clone git://github.com/eklem/eklem-spider.git 
-  cd spider
-  npm link ../spider
-</pre>
+```console
+  $ npm install eklem-spider
+```
 
 ## (How to use the) API
 
 ### Creating a Spider
 <pre>
-  var spider = require('spider');
+  var spider = require('eklem-spider');
   var s = spider();
 </pre>
 
