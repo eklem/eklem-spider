@@ -1,11 +1,11 @@
-# Spider -- Programmable spidering of web sites with node.js and jQuery
+# Spider -- Programmable spidering of web sites with node.js and cheerio. Forked version of Mikeal Rogers' `spider`.
 
 ## Install
 
 From source:
 
 <pre>
-  git clone git://github.com/mikeal/spider.git 
+  git clone git://github.com/eklem/eklem-spider.git 
   cd spider
   npm link ../spider
 </pre>

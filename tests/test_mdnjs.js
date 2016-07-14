@@ -2,7 +2,7 @@ var spider = require('../main');
 
 var jsSpider = spider();
 
-jsSpider.route('developer.mozilla.org', '/en/JavaScript/Reference', function ($) {
+jsSpider.route('developer.mozilla.org', '/en-US/JavaScript/Reference', function ($) {
   var crawlfn = function() {
     var href = $(this).attr('href');
     jsSpider.get(href);
@@ -20,7 +20,7 @@ var subroutes = [
 ];
 for (var i = 0; i < subroutes.length; ++i) {
   var subroute = subroutes[i];
-  jsSpider.route('developer.mozilla.org', '/en/' + subroute + '/*', function ($, url) {
+  jsSpider.route('developer.mozilla.org', '/en-US/' + subroute + '/*', function ($, url) {
     console.log(url + ' :: ' + $('#title').text().trim());
     console.dir(url + ' :: ' + $('#title').text().trim());
     var crawlfn = function() {
@@ -31,5 +31,5 @@ for (var i = 0; i < subroutes.length; ++i) {
   });
 }
 
-jsSpider.get('https://developer.mozilla.org/en/JavaScript/Reference').log('info');
+jsSpider.get('https://developer.mozilla.org/en-US/JavaScript/Reference').log('debug');
 

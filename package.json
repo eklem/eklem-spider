@@ -1,24 +1,29 @@
 {
-  "name" : "spider",
-  "description" : "Programmable spidering of web sites with node.js and jQuery",
-  "tags" : ["dom","javascript","crawling","jquery", "spider", "spidering"],
-  "version" : "0.0.2",
-  "author" : "Mikeal Rogers <mikeal.rogers@gmail.com>",
-  "repository" :
+  "name": "eklem-spider",
+  "description": "Programmable spidering of web sites with node.js and jQuery. Forked version of Mikeal Rogers' spider.",
+  "tags": ["dom","javascript","crawling","jquery", "spider", "spidering"],
+  "version": "0.0.3",
+  "author": "Espen Klem <espen.klem@gmail.com>",
+  "repository":
   { 
-    "type" : "git",
-    "url" : "http://github.com/mikeal/spider.git"
+    "type": "git",
+    "url": "http://github.com/eklem/eklem-spider.git"
   },
-  "bugs" :
+  "bugs":
   {
-    "url" : "http://github.com/mikeal/spider/issues"
+    "url": "http://github.com/eklem/eklem-spider/issues"
   },
-  "engines" : ["node >= 0.4.4"],
-  "main" : "./main",
-  "dependencies" :
+  "engines": ["node >= 0.4.4"],
+  "main": "./main",
+  "dependencies":
   {
-    "request" : "~2.73.0",
-    "routes" : "~2.1.0",
-    "cheerio": "~0.20.0"
+    "request": "~2.73.0",
+    "path": "~0.12.7",
+    "url": "~0.11.0",
+    "routes": "~2.1.0",
+    "events": "~1.1.1",
+    "util": "~0.10.3",
+    "cheerio": "~0.20.0",
+    "jsonfile": "~2.3.1"
   }
 }

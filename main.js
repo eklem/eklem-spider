@@ -1,20 +1,19 @@
 var request = require('request')
-, path = require('path')
-, urlParse = require('url').parse
-, routes = require('routes')
-, events = require('events')
-, util = require('util')
-, cheerio = require('cheerio')
-;
+var path = require('path')
+var urlParse = require('url').parse
+var routes = require('routes')
+var events = require('events')
+var util = require('util')
+var cheerio = require('cheerio')
 
 var headers = {
-  'accept': "application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5"
-  , 'accept-language': 'en-US,en;q=0.8'
-  , 'accept-charset':  'ISO-8859-1,utf-8;q=0.7,*;q=0.3'
+  'accept': "application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5",
+  'accept-language': 'en-US,en;q=0.8',
+  'accept-charset':  'ISO-8859-1,utf-8;q=0.7,*;q=0.3'
 };
 
 var firefox = 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_4; en-US) ' +
-  'AppleWebKit/534.7 (KHTML, like Gecko) Chrome/7.0.517.41 Safari/534.7';
+  'AppleWebKit/534.7 (KHTML, like Gecko) Chrome/7.0.517.41 Safari/534.7'
 
 var copy = function (obj) {
   var n = {};
@@ -25,11 +24,17 @@ var copy = function (obj) {
 };
 
 var debug = 1
-, info = 50
-, error = 100
-;
+var info = 50
+var error = 100
 
-var logLevels = {debug:debug, info:info, error:error, 1:'debug', 50:'info', 100:'error'};
+var logLevels = {
+  debug : debug,
+  info : info,
+  error : error,
+  1 : 'debug',
+  50 : 'info',
+  100 : 'error'
+}
 
 function MemoryCache() {
   this.cache = {};
