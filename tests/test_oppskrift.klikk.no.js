@@ -1,48 +1,53 @@
-var spider = require('../main')()
+// Required modules
+var request = require('request')
+var cheerio = require("cheerio")
 var jf = require('jsonfile')
-var file = ('./href.json')
-var recipes = {href: []}
-var playNice = 2500
 
-spider.route('oppskrift.klikk.no', '*',
+// Variables needed
+var hrefFile = ('./href.json')
+var recipesFile = ('./recipes.json')
+var recipes = []
+var playNice = 10000
+var hrefArray = jf.readFileSync(hrefFile)
+var arrayLength = hrefArray.length
 
-  // Getting next page url and spidering
-  function ($) {
-    $('div.next a.fontQ.brandColor').each(function() {
-      var href = $(this).attr('href')
-      spider.get(href)
-      wait(playNice)
-    })
-  
-    if (this.fromCache) return recipes.href
-    
-    // Extracting recipes URLs    
-    $('div.recipe-item div.text a').each(function() {
-      if (!/^\//.test($(this).attr('href'))) {
-        recipes.href.push($(this).attr('href'))
-      }
-      if (/^\//.test($(this).attr('href'))) {
-        console.log('Skipped user URL')
-      }
-    })
-    write(file, recipes.href)
+
+for (var i = 0; i < arrayLength; i++) {
+  request(hrefArray[i], function (error, response, body) {
+    if (error) {
+      console.log(error)
+    }
+    if (!error) {
+      var item = {'id': '', 'url': '', 'title': '', 'photo': ''}
+      var idArray = []
+      var idRe = /\d+/g
+      $ = cheerio.load(response)
+      item.id = response.request.uri.path.match(/([^\/]*)\/*$/)[1]
+      item.url = response.request.uri.href
+      $ = null
+      $ = cheerio.load(body)
+      item.title = $('div.recipe h1.title').text()
+      item.photo = $('div.recipe div.imageContainer img').attr('src')
+      recipes.push(item)
+    }
+    console.dir(item)
+  wait(playNice)
   })
+}
 
-// Starting point
-spider.get('http://oppskrift.klikk.no/?start=5832')
 
-// spider-logging to console
-spider.log('debug')
 
-//Write links to JSON file
-function write(file, href) {
-  jf.writeFile(file, href, {spaces: 2}, function (err) {
+
+
+// Write array of recipes to JSON file
+function write(file, recipes) {
+  jf.writeFile(file, recipes, {spaces: 2}, function (err) {
     if(err) {
       console.error(err)
     }
     if(!err) {
       // Does it look okay?
-      //console.dir(href)
+      //console.dir(recipes)
     }
   })
 }

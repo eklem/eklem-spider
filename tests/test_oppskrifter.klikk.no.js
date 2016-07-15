@@ -1,10 +1,11 @@
 var spider = require('../main')()
 var jf = require('jsonfile')
 var file = ('./href.json')
-var recipes = {href: []}
+var recipes = {items: []}
 var playNice = 2500
 
-spider.route('oppskrift.klikk.no', '*',
+spider
+.route('oppskrift.klikk.no', '*',
 
   // Getting next page url and spidering
   function ($) {
@@ -13,6 +14,7 @@ spider.route('oppskrift.klikk.no', '*',
       spider.get(href)
       wait(playNice)
     })
+    if (this.fromCache) return
     
     // Extracting recipes URLs    
     $('div.recipe-item div.text a').each(function() {
@@ -20,35 +22,28 @@ spider.route('oppskrift.klikk.no', '*',
         var hrefItem = $(this).attr('href')
         spider.get(hrefItem)
         wait(playNice)
+        return hrefItem
       }
       if (/^\//.test($(this).attr('href'))) {
         console.log('Skipped user URL')
       }
     })
-  
-    if (this.fromCache) return
-  })
-
-spider.route('oppskrift.klikk.no', '/:title/:id/',
-  function ($) {
-    // Extracting recipes URLs    
-    $('div.recipe h1.title').each(function() {
-      var href = $(this).attr('href')
-      spider.get(href)
-      wait(playNice)
-    })
     
+
     // Extracting recipes URLs    
     $('body').each(function() {
-      console.log($('div.recipe h1.title').text())
+      var item = {'title': '', 'photo': ''}
+      item.title = $('div.recipe h1.title').text()
+      item.photo = $('div.recipeContent div.mainImageWrapper img').attr('src')
+      console.dir(item)
     })
   })
 
 // Starting point
-spider.get('http://oppskrift.klikk.no/?start=5832')
+.get('http://oppskrift.klikk.no/?start=5832')
 
 // spider-logging to console
-spider.log('debug')
+.log('debug')
 
 //Write links to JSON file
 function write(file, href) {
